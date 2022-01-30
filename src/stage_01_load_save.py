@@ -20,7 +20,7 @@ def get_data(config_path):
 
 
     create_directory(dirs= [raw_local_dir_path])
-
+    
     raw_local_file_path = os.path.join(raw_local_dir_path, raw_local_file)
     
     df.to_csv(raw_local_file_path, sep=",", index=False)

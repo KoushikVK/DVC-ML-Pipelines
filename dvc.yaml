@@ -1,3 +1,13 @@
 #staging related files go here
+stages:
+  load_data:
+    cmd: python src/stage_01_load_save.py --config=config/config.yaml
+    deps:
+      - src/stage_01_load_save.py
+      - src/utils/all_utils.py
+      - config/config.yaml      #if there is any change with config this stage shld run accordingly
+    outs:
+      - artifacts/raw_local_dir/data.csv      #output of first stage is loading dataset from amazon s3
 
 
+  
