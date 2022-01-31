@@ -1,4 +1,5 @@
 #staging related files go here
+#Automating Machine Learning Pipeline
 stages:
   always_run:
     cmd: python rough/test.py
@@ -45,4 +46,14 @@ stages:
       - model_parameters.ElasticNet.random_state
     outs:
       - artifacts/model_dir/ElasticNet.model
-  
+  #stage 4 evaluation metrics
+  evaluate:
+    cmd: python src/stage_04_evaluate.py --config=config/config.yaml --params=params.yaml
+    deps:
+      - src/stage_04_evaluate.py
+      - src/utils/all_utils.py
+      - config/config.yaml
+      - artifacts/split_data_dir/test.csv
+      - artifacts/model_dir/ElasticNet.model
+    outs:
+      - artifacts/reports_dir/scores.json   

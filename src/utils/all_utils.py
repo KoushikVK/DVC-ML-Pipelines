@@ -1,6 +1,7 @@
 from numpy import True_
 import yaml
 import os
+import json
 
 
 #send config file and it ll return as dictionary
@@ -25,7 +26,16 @@ def create_directory(dirs:list):
 #method to save df locally
 def save_local_df(data,data_path,index =False):
     data.to_csv(data_path,index= index)  
-    print(f"data is saved at {data_path}")      
+    print(f"data is saved at {data_path}")    
+
+#saving model metrics in json
+def save_reports(report : dict ,report_path : str): #acceptig reports as dict amd report_path as str
+    with open(report_path,"w") as f:
+        json.dump(report,f,indent =4)
+    print(f"Reports are saved at {report_path}")    
+      
+
+
 
 
 
