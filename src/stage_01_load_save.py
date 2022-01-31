@@ -18,7 +18,7 @@ def get_data(config_path):
     # create path to directory: artifacts/raw_local_dir/data.csv
     raw_local_dir_path = os.path.join(artifacts_dir, raw_local_dir) #create a dir under artifacts_dir
 
-
+    #creating a directory here 
     create_directory(dirs= [raw_local_dir_path])
     
     raw_local_file_path = os.path.join(raw_local_dir_path, raw_local_file)

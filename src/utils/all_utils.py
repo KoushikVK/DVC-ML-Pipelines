@@ -22,4 +22,10 @@ def create_directory(dirs:list):
         print(f"dir is placed at {dir_path}")
 
 
+#method to save df locally
+def save_local_df(data,data_path,index =False):
+    data.to_csv(data_path,index= index)  
+    print(f"data is saved at {data_path}")      
+
+
 

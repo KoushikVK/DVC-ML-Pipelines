@@ -1,5 +1,13 @@
 #staging related files go here
 stages:
+  always_run:
+    cmd: python rough/test.py
+    deps: 
+      -  rough/test.py   #in order to keep tracking of any changes in a file we make it as dependency
+    outs:
+      -  rough/test.txt
+
+      #stage 1
   load_data:
     cmd: python src/stage_01_load_save.py --config=config/config.yaml
     deps:
@@ -8,6 +16,19 @@ stages:
       - config/config.yaml      #if there is any change with config this stage shld run accordingly
     outs:
       - artifacts/raw_local_dir/data.csv      #output of first stage is loading dataset from amazon s3
-
-
+  #stage 2 (splitting the data)
+  split_data:
+    cmd: python src/stage_02_split_data.py --config=config/config.yaml --params=params.yaml
+    deps:
+      - src/stage_02_split_data.py
+      - src/utils/all_utils.py
+      - config/config.yaml
+      - artifacts/raw_local_dir/data.csv
+    params:
+      - base.random_state
+      - base.test_size
+    outs:
+      - artifacts/split_data_dir/train.csv
+      - artifacts/split_data_dir/test.csv
+    
   
